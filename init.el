@@ -6,6 +6,9 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+;; load theme by default
+(load-theme 'dracula t)
+
 ;; install your favorite packages all at once
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
