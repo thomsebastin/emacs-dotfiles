@@ -7,6 +7,9 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+;; set default font
+(set-default-font "Hack")
+
 ;; disable menu bar
 (menu-bar-mode -1) 
 

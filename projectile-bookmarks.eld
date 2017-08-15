@@ -1,0 +1,1 @@
+("~/workspace/ott/ott/" "~/.emacs.d/")
