@@ -1,3 +1,4 @@
+;; enable some repositories to be used by emacs to download packages ;
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -6,8 +7,73 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+;; disable menu bar
+(menu-bar-mode -1) 
+
+;; disable the scrollbar
+(toggle-scroll-bar -1)
+
+;; disable toolbar
+(tool-bar-mode -1)
+
 ;; load theme by default
 (load-theme 'dracula t)
+
+;; use space instead of tab
+(setq indent-tabs-mode nil)
+
+;; tabs to two spaces in js mode
+(setq js-indent-level 2)
+;; intent specific code for major modes
+(defun my-setup-indent (n)
+  ;; web development
+  (setq-local js-indent-level n) ; js-mode
+)
+
+;; two space indent style
+(defun two-space-indent ()
+  (interactive)
+  (message "Two space indent")
+  ;; use space instead of tab
+  (setq indent-tabs-mode nil)
+  ;; indent 2 spaces width
+  (my-setup-indent 2))
+
+;; call the indentation for the modes you need
+;; prog-mode-hook requires emacs24+
+(add-hook 'prog-mode-hook 'two-space-indent)
+;; enable line number in prog-mode only
+(add-hook 'prog-mode-hook 'linum-mode)
+
+;; Tide mode for typescript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;; enable projectile mode
+(projectile-global-mode)
+
+;; enable caching mode
+(setq projectile-enable-caching t)
+
+;; indexing folders for fast performance
+(setq projectile-indexing-method 'native)
 
 ;; install your favorite packages all at once
 (unless (package-installed-p 'use-package)
