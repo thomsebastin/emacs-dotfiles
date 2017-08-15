@@ -47,6 +47,9 @@
 (add-hook 'prog-mode-hook 'two-space-indent)
 ;; enable line number in prog-mode only
 (add-hook 'prog-mode-hook 'linum-mode)
+;; to avoid line number breakage when zooming in
+(eval-after-load "linum"
+  '(set-face-attribute 'linum nil :height 100))
 
 ;; Tide mode for typescript
 (defun setup-tide-mode ()
@@ -92,6 +95,9 @@
 (use-package magit
   :ensure t)
 
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; enable evil mode by default
 (require 'evil)
 (evil-mode t)
@@ -108,6 +114,12 @@
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
 (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+(global-set-key (kbd "C-x b") 'helm-mini)
+
+;; To enable fuzzy matching
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
 
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))
