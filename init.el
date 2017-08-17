@@ -13,6 +13,9 @@
 ;; disable menu bar
 (menu-bar-mode -1) 
 
+;; enable auto pairing
+(electric-pair-mode 1)
+
 ;; disable the scrollbar
 (toggle-scroll-bar -1)
 
@@ -33,6 +36,26 @@
   (setq-local js-indent-level n) ; js-mode
 )
 
+;; enabling js beautify mode
+(require 'web-beautify) ;; Not necessary if using ELPA package
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+(eval-after-load 'js
+  '(define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
+
+(eval-after-load 'json-mode
+  '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+
+(eval-after-load 'sgml-mode
+  '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+
+(eval-after-load 'web-mode
+  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
+
+(eval-after-load 'css-mode
+  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+
 ;; two space indent style
 (defun two-space-indent ()
   (interactive)
@@ -42,11 +65,25 @@
   ;; indent 2 spaces width
   (my-setup-indent 2))
 
+;; two space indent style
+(defun four-space-indent ()
+  (interactive)
+  (message "Four space indent")
+  ;; use space instead of tab
+  (setq indent-tabs-mode nil)
+  ;; indent 4 spaces width
+  (my-setup-indent 4))
+
 ;; call the indentation for the modes you need
 ;; prog-mode-hook requires emacs24+
-(add-hook 'prog-mode-hook 'two-space-indent)
+(add-hook 'prog-mode-hook 'four-space-indent)
+
+;; two space indent only on typescript mode
+(add-hook 'typescript-mode-hook 'two-space-indent)
+
 ;; enable line number in prog-mode only
 (add-hook 'prog-mode-hook 'linum-mode)
+
 ;; to avoid line number breakage when zooming in
 (eval-after-load "linum"
   '(set-face-attribute 'linum nil :height 100))

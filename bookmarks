@@ -1,0 +1,10 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("jedi"
+ (filename . "~/sample.org")
+ (front-context-string . "re\n** TODO Sub t")
+ (rear-context-string . "ODO Some todo he")
+ (position . 52))
+)
