@@ -190,3 +190,11 @@
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+
+;; org mode
+
+;; show when a TODO is done
+(setq org-log-done 'time)
+
+;; keep a log file for a todo when done
+(setq org-log-done 'note)
