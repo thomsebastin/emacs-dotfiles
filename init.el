@@ -22,9 +22,6 @@
 ;; disable toolbar
 (tool-bar-mode -1)
 
-;; load theme by default
-(load-theme 'dracula t)
-
 ;; use space instead of tab
 (setq indent-tabs-mode nil)
 
@@ -161,6 +158,7 @@
 (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
 (global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x f") 'helm-find)
 
 ;; org mode sensible defaults
 (global-set-key "\C-cl" 'org-store-link)
@@ -217,16 +215,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(custom-enabled-themes (quote (dracula)))
- '(custom-safe-themes
-   (quote
-    ("d6922c974e8a78378eacb01414183ce32bc8dbf2de78aabcc6ad8172547cb074" "12480cb5731d444135d26a054b3c838869c3005c82eb806a119b71b0fc4bb542" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
- '(fci-rule-color "#383838")
- '(org-agenda-files (quote ("~/org-files/personal.org" "~/sample.org"))))
+ '(custom-enabled-themes (quote (wombat)))
+ '(org-agenda-files (quote ("~/org-files/personal.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
