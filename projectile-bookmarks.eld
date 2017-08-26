@@ -1,1 +1,1 @@
-("~/workspace/ott/ott/" "~/.emacs.d/" "~/workspace/gnome/signal-detection/")
+("~/.emacs.d/" "~/workspace/ott/ott/" "~/workspace/gnome/signal-detection/")
