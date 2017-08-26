@@ -1,1 +1,0 @@
-("~/.emacs.d/" "~/workspace/ott/ott/" "~/workspace/gnome/signal-detection/")
