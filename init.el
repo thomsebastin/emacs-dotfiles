@@ -1,14 +1,14 @@
 ;; enable some repositories to be used by emacs to download packages ;
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 
 (setq package-enable-at-startup nil)
-(package-initialize)
+(package-initialize nil)
 
 ;; set default font
-(set-default-font "Hack")
+(set-default-font "PragmataPro")
 
 ;; disable menu bar
 (menu-bar-mode -1) 
@@ -82,6 +82,7 @@
 ;; call the indentation for the modes you need
 ;; prog-mode-hook requires emacs24+
 (add-hook 'prog-mode-hook 'four-space-indent)
+(add-hook 'prog-mode-hook 'company-mode)
 
 ;; two space indent only on typescript mode
 (add-hook 'typescript-mode-hook 'two-space-indent)
@@ -135,6 +136,9 @@
   :ensure t)
 
 (use-package magit
+  :ensure t)
+
+(use-package all-the-icons
   :ensure t)
 
 (require 'magit)
@@ -215,7 +219,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (wombat)))
+ '(custom-safe-themes
+   (quote
+    ("3eb2b5607b41ad8a6da75fe04d5f92a46d1b9a95a202e3f5369e2cdefb7aac5c" default)))
  '(org-agenda-files (quote ("~/org-files/personal.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -223,3 +229,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Set the default theme
+(load-theme 'gruvbox)
