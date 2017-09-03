@@ -7,9 +7,6 @@
 (setq package-enable-at-startup nil)
 (package-initialize nil)
 
-;; set default font
-(set-default-font "PragmataPro")
-
 ;; disable menu bar
 (menu-bar-mode -1) 
 
@@ -275,6 +272,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; Set the default theme
-(load-theme 'gruvbox)
