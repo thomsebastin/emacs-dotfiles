@@ -7,11 +7,17 @@
 (setq package-enable-at-startup nil)
 (package-initialize nil)
 
+;; to log errors
+(setq debug-on-error t)
+
 ;; disable menu bar
 (menu-bar-mode -1) 
 
-;; enable auto pairing
+;; enable auto pairing of parenthesis
 (electric-pair-mode 1)
+
+;; show matching parens
+(show-paren-mode 1)
 
 ;; disable the scrollbar
 (toggle-scroll-bar -1)
@@ -24,22 +30,26 @@
 
 ;; tabs to two spaces in js mode
 (setq js-indent-level 2)
-;; intent specific code for major modes
+
+;; indent specific code for major modes
 (defun my-setup-indent (n)
   ;; web development
   (setq-local js-indent-level n) ; js-mode
 )
 
-;; configs related to multiple cursors
-(require 'multiple-cursors)
-
-(global-set-key (kbd "C-c m c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; converting multiple cursors to use 'use-package'
+(use-package multiple-cursors
+  :commands multiple-cursors
+  :init
+  :bind (
+            ("C-c m c" . mc/edit-lines)
+            ("C->"     . mc/mark-next-like-this)
+            ("C-<"     . mc/mark-previous-like-this)
+            ("C-c C-<" . mc/mark-all-like-this)
+         ))
 
 ;; enabling js beautify mode
-(require 'web-beautify) ;; Not necessary if using ELPA package
+(require 'web-beautify)
 (eval-after-load 'js2-mode
   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
 ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
@@ -82,7 +92,7 @@
 (add-hook 'prog-mode-hook 'company-mode)
 
 ;; two space indent only on typescript mode
-(add-hook 'typescript-mode-hook 'two-space-indent)
+;; (add-hook 'typescript-mode-hook 'two-space-indent)
 
 ;; enable line number in prog-mode only
 (add-hook 'prog-mode-hook 'linum-mode)
@@ -92,25 +102,25 @@
   '(set-face-attribute 'linum nil :height 100))
 
 ;; Tide mode for typescript
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
+;; (defun setup-tide-mode ()
+;;   (interactive)
+;;   (tide-setup)
+;;   (flycheck-mode +1)
+;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+;;   (eldoc-mode +1)
+;;   (tide-hl-identifier-mode +1)
+;;   ;; company is an optional dependency. You have to
+;;   ;; install it separately via package-install
+;;   ;; `M-x package-install [ret] company`
+;;   (company-mode +1))
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
 ;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
+;; (add-hook 'before-save-hook 'tide-format-before-save)
 
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 ;; enable projectile mode
 (projectile-global-mode)
@@ -262,10 +272,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("3eb2b5607b41ad8a6da75fe04d5f92a46d1b9a95a202e3f5369e2cdefb7aac5c" default)))
- '(org-agenda-files (quote ("~/org-files/personal.org"))))
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(fci-rule-color "#383838")
+ '(org-agenda-files (quote ("~/org-files/personal.org")))
+ '(org-startup-truncated nil))
+;; highlight issue fix in kde
+(set-face-attribute 'region nil :background "#4286f4" :foreground "#ffffff")
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
