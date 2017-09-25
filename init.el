@@ -92,7 +92,7 @@
 (add-hook 'prog-mode-hook 'company-mode)
 
 ;; two space indent only on typescript mode
-;; (add-hook 'typescript-mode-hook 'two-space-indent)
+(add-hook 'typescript-mode-hook 'two-space-indent)
 
 ;; enable line number in prog-mode only
 (add-hook 'prog-mode-hook 'linum-mode)
@@ -101,26 +101,8 @@
 (eval-after-load "linum"
   '(set-face-attribute 'linum nil :height 100))
 
-;; Tide mode for typescript
-;; (defun setup-tide-mode ()
-;;   (interactive)
-;;   (tide-setup)
-;;   (flycheck-mode +1)
-;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-;;   (eldoc-mode +1)
-;;   (tide-hl-identifier-mode +1)
-;;   ;; company is an optional dependency. You have to
-;;   ;; install it separately via package-install
-;;   ;; `M-x package-install [ret] company`
-;;   (company-mode +1))
-
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
-
-;; formats the buffer before saving
-;; (add-hook 'before-save-hook 'tide-format-before-save)
-
-;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 ;; enable projectile mode
 (projectile-global-mode)
